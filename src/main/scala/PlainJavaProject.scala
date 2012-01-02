@@ -7,9 +7,9 @@ object PlainJavaProject {
   lazy val settings: Seq[Setting[_]] = inConfig(Android) (Seq(
     useProguard := false,
     autoScalaLibrary in GlobalScope := false,
-    manifestPath <<= (baseDirectory, manifestName) map((s,m) => Seq(s / m)) map (x=>x),
+    manifestPath <<= (baseDirectory, manifestName) map((s,m) => Seq(s / m)) map identity,
     proguardOptimizations := Seq.empty,
-    mainResPath <<= (baseDirectory, resDirectoryName) (_ / _) map (x=>x),
+    mainResPath <<= (baseDirectory, resDirectoryName) (_ / _) map identity,
     mainAssetsPath <<= (baseDirectory, assetsDirectoryName) (_ / _),
     javaSource in Compile <<= (baseDirectory) (_ / "src")
     )
